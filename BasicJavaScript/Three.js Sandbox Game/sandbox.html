@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Sandbox</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!-- This is a basic sandbox game where the player can move around a 3D environment and add/remove cubes -->
+
+
+<!-- Set up the canvas element where the game will be rendered -->
+<canvas id="gameCanvas"></canvas>
+
+<!-- Create the 3D scene -->
+<script type="module">
+  import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+  // Set up the scene, camera, and renderer
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ canvas: gameCanvas });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  // Set up the player's cube
+  const playerGeometry = new THREE.BoxGeometry(1, 1, 1);
+  const playerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  const player = new THREE.Mesh(playerGeometry, playerMaterial);
+  scene.add(player);
+  player.position.y = 1;
+
+  // Set up the lights
+  const light = new THREE.PointLight(0xffffff, 1, 100);
+  light.position.set(10, 10, 10);
+  scene.add(light);
+
+  // Set up the floor
+  const floorGeometry = new THREE.PlaneGeometry(20, 20, 1, 1);
+  const floorMaterial = new THREE.MeshBasicMaterial({ color: 0x808080, side: THREE.DoubleSide });
+  const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+  scene.add(floor);
+  floor.rotation.x = Math.PI / 2;
+
+  // Set up the camera's initial position
+  camera.position.z = 5;
+  camera.position.y = 2;
+  camera.lookAt(0, 1, 0);
+
+  // Set up the game loop
+  function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  }
+  animate();
+</script>
+
+<!-- Set up the controls for moving the player's cube and adding/removing cubes -->
+<script>
+  // Set up the controls for moving the player's cube
+  let isWDown = false;
+  let isADown = false;
+  let isSDown = false;
+  let isDDown = false;
+  window.addEventListener("keydown", (event) => {
+    switch (event.code) {
+      case "KeyW":
+        isWDown = true;
+        break;
+      case "KeyA":
+        isADown = true;
+        break;
+      case "KeyS":
+        isSDown = true;
+        break;
+      case "KeyD":
+        isDDown = true;
+        break;
+    }
+  });
+  window.addEventListener("keyup", (event) => {
+    switch (event.code) {
+      case "KeyW":
+        isWDown = false;
+        break;
+        case "KeyA":
+        isADown = false;
+        break;
+      case "KeyS":
+        isSDown = false;
+        break;
+      case "KeyD":
+        isDDown = false;
+        break;
+    }
+  });
+
+  // Set up the controls for adding/removing cubes
+  let isSpaceDown = false;
+  window.addEventListener("keydown", (event) => {
+    if (event.code === "Space") {
+      isSpaceDown = true;
+    }
+  });
+  window.addEventListener("keyup", (event) => {
+    if (event.code === "Space") {
+      isSpaceDown = false;
+    }
+  });
+
+  // Update the player's position based on the arrow keys being pressed
+  function updatePlayerPosition() {
+    if (isWDown) {
+      player.position.z -= 0.1;
+    }
+    if (isADown) {
+      player.position.x -= 0.1;
+    }
+    if (isSDown) {
+      player.position.z += 0.1;
+    }
+    if (isDDown) {
+      player.position.x += 0.1;
+    }
+  }
+
+  // Add a cube at the player's current position
+  function addCube() {
+    const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+    const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+    const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    scene.add(cube);
+    cube.position.x = player.position.x;
+    cube.position.z = player.position.z;
+    cube.position.y = 1;
+  }
+
+  // Remove the nearest cube to the player
+  function removeCube() {
+    // Find the nearest cube to the player
+    let nearestDistance = Infinity;
+    let nearestCube = null;
+    scene.children.forEach((child) => {
+      if (child.type === "Mesh" && child !== player) {
+        const distance = child.position.distanceTo(player.position);
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nearestCube = child;
+        }
+      }
+    });
+
+    // Remove the nearest cube if one was found
+    if (nearestCube) {
+      scene.remove(nearestCube);
+    }
+  }
+
+  // Update the player's position and add/remove cubes based on the controls
+  function update() {
+    updatePlayerPosition();
+    if (isSpaceDown) {
+      addCube();
+    } else {
+      removeCube();
+    }
+  }
+
+  // Set up the game loop to update the player's position and add/remove cubes
+  function animate() {
+    requestAnimationFrame(animate);
+    update();
+    renderer.render(scene, camera);
+  }
+  animate();
+</script>
+
+    </body>
+</html>
