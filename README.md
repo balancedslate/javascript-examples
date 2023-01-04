@@ -16,15 +16,15 @@ Open GL Repository: https://github.com/balancedslate/graphics-examples
 Major Projects: 
 These were created as a part of a Javascript Course @ CofC to be downloaded and run locally as HTML files.
 
-[99 Bottles](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/99Bottles)
-[BMI Calculator](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/BMI%20Calculator)
-[Dice Challenge](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/DiceeChallenge)
-[Drum Kit](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/Drum%20Kit)
-[Simon Game](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/Simon%20Game)
-[DOM Challenge](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/DOM%20Challenge%20Starting%20Files)
-[Leap Year Calculator](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/LeapYearCalculator)
-[Love Calculator](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/LoveCalculator)
+[99 Bottles](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/99Bottles)  
+[BMI Calculator](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/BMI%20Calculator)  
+[Dice Challenge](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/DiceeChallenge)  
+[Drum Kit](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/Drum%20Kit)  
+[Simon Game](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/Simon%20Game)  
+[DOM Challenge](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/DOM%20Challenge%20Starting%20Files)  
+[Leap Year Calculator](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/LeapYearCalculator)  
+[Love Calculator](https://github.com/balancedslate/javascript-examples/tree/main/BasicJavaScript/LoveCalculator)  
 
 
-Please Enjoy.
+Please Enjoy.  
 -Levi Kenley (Zen)
